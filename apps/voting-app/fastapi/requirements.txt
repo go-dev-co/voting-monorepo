@@ -1,4 +1,4 @@
 fastapi[all]
-pytest 
+pytest
 httpx
-pylint
+flake8

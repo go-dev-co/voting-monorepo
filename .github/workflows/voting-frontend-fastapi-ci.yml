@@ -20,7 +20,7 @@ jobs:
       run: pip install -r ./apps/voting-app/fastapi/requirements.txt
 
     - name: Lint code
-      run: pylint ./apps/voting-app/fastapi/src/
+      run: flake8 ./apps/voting-app/fastapi/
 
     - name: Run tests
       run: pytest ./apps/voting-app/fastapi/tests/
