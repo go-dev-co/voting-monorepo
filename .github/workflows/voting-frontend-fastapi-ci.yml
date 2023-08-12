@@ -24,4 +24,9 @@ jobs:
 
     - name: Run tests
       run: pytest ./apps/voting-app/fastapi/tests/
+    
+    - name: Build Docker image
+      run: docker build -t voting-app ./apps/voting-app/fastapi/
+      
+      
 
