@@ -53,3 +53,6 @@ secrets.yaml
 *.swp
 *.swo
 *.~
+
+
+docker-compose.yml
