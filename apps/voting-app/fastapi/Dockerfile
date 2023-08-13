@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-RUN ls | echo
+RUN echo | ls
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r /app/apps/voting-app/fastapi/requirements.txt
