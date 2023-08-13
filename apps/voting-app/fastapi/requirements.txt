@@ -2,3 +2,4 @@ fastapi[all]
 pytest
 httpx
 flake8
+redis[hiredis]
