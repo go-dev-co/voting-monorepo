@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from .middleware import validate_user_hash_middleware
+from middleware import validate_user_hash_middleware
 
 app = FastAPI()
 
