@@ -5,10 +5,10 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY ./apps /app
+COPY . /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip3 install --no-cache-dir -r ./voting-app/fastapi/requirements.txt
+RUN pip3 install --no-cache-dir -r ./apps/voting-app/fastapi/requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
