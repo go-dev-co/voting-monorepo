@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: pip install -r ./apps/voting-app/fastapi/requirements.txt
+
+    - name: Lint code
+      run: flake8 ./apps/voting-app/fastapi/
+
+    - name: Run tests
+      run: pytest ./apps/voting-app/fastapi/tests/
+    
+    - name: Build Docker image
+      run: docker build -t voting-app ./apps/voting-app/fastapi/
+      
+      
+
