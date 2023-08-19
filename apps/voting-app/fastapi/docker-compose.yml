@@ -8,8 +8,8 @@ services:
             - "80:80"
         environment:
             REDIS_URL: "redis://username:password@redis:6379/0"
-            USERNAME: your-username
-            PASSWORD: your-password
+            USERNAME: username
+            PASSWORD: password
         depends_on:
             - redis
 
@@ -17,4 +17,4 @@ services:
         image: "redis:latest"
         ports:
             - "6379:6379"
-        command: redis-server --requirepass your-password
+        command: redis-server --requirepass password
