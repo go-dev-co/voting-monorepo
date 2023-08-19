@@ -1,20 +1,23 @@
+# fastapi-app:
+#     build:
+#         context: .
+#         dockerfile: Dockerfile
+#     ports:
+#         - "80:80"
+#     environment:
+#         REDIS_URL: "redis://username:password@redis:6379/0"
+#         USERNAME: username
+#         PASSWORD: password
+#     depends_on:
+#         - redis
+
 version: '3.8'
 services:
-    fastapi-app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        ports:
-            - "80:80"
-        environment:
-            REDIS_URL: "redis://username:password@redis:6379/0"
-            USERNAME: username
-            PASSWORD: password
-        depends_on:
-            - redis
-
     redis:
         image: "redis:latest"
+        container_name: redis_container
+        volumes:
+            - ./redis.conf:/usr/local/etc/redis/redis.conf
+        command: redis-server /usr/local/etc/redis/redis.conf
         ports:
             - "6379:6379"
-        command: redis-server --requirepass password

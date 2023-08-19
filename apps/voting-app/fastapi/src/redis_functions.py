@@ -7,11 +7,10 @@ logger = logging.getLogger(__name__)
 logger.info("Redis functions loaded")
 
 
-def create_redis_instance(host, port, channel, password, username):
+def create_redis_instance(host, port, channel, password, ):
     try:
         return redis.Redis(
-            host=host, port=port, decode_responses=True, password=password,
-            username=username)
+            host=host, port=port, decode_responses=True, password=password)
     except Exception as e:
         logger.error(f"Error creating redis instance: {e}")
         print(e)
