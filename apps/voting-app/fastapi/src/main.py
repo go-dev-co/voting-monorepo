@@ -2,8 +2,6 @@ from fastapi import FastAPI, HTTPException
 from src.middleware import validate_user_hash_middleware
 app = FastAPI()
 
-# connect to reddis
-
 
 @app.get("/")
 def read_root():

@@ -10,14 +10,14 @@ valid_header = {
 }
 
 
-def test_get_root():
+def test_get_root(redis_client):
 
     response = client.get("/", headers=valid_header)
     assert response.status_code == 200
     assert response.json() == {"message": "Welcome to FastAPI"}
 
 
-def test_post_vote_cats():
+def test_post_vote_cats(redis_client):
 
     response = client.post(
         "/vote", json={"vote": "cats"}, headers=valid_header)
@@ -25,7 +25,7 @@ def test_post_vote_cats():
     assert response.json() == {"vote": "cats"}
 
 
-def test_post_vote_dogs():
+def test_post_vote_dogs(redis_client):
 
     response = client.post(
         "/vote", json={"vote": "dogs"}, headers=valid_header)
@@ -33,7 +33,7 @@ def test_post_vote_dogs():
     assert response.json() == {"vote": "dogs"}
 
 
-def test_post_vote_invalid():
+def test_post_vote_invalid(redis_client):
 
     response = client.post(
         "/vote", json={"vote": "invalid"}, headers=valid_header)
@@ -41,7 +41,7 @@ def test_post_vote_invalid():
     assert response.json() == {"detail": "Invalid submission"}
 
 
-def test_valid_user_hash():
+def test_valid_user_hash(redis_client):
 
     response = client.post(
         "/vote", json={"vote": "cats"}, headers=valid_header)

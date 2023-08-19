@@ -10,6 +10,7 @@ def redis_client():
     os.environ["REDIS_CHANNEL"] = "votes"
     os.environ["REDIS_PASSWORD"] = "password"
     os.environ["REDIS_USERNAME"] = "username"
+    os.environ["REDIS_CHANNEL_TEST_MESSAGE"] = "TEST_MESSAGE"
 
 
 @pytest.fixture(scope="session", autouse=True)

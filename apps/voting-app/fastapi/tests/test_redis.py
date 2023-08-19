@@ -1,29 +1,11 @@
 
-from src.redis_functions import create_redis_instance
+from src.redis_functions import create_redis_instance, publish_vote_to_redis
 import os
 import redis
 import logging
 from redis.exceptions import ConnectionError
 
 
-#     client = create_redis_instance(os.environ["REDIS_HOST"],
-#                                    os.environ["REDIS_PORT"],
-#                                    os.environ["REDIS_CHANNEL"],
-#                                    password=os.environ["REDIS_PASSWORD"],
-#                                    username=os.environ["REDIS_USERNAME"])
-
-#     yield client
-#     client.close()
-
-
-# def test_redis_connection(redis_client):
-#     try:
-#         response = redis_client.ping()
-#         assert response is True
-#     except Exception as e:
-#         pytest.fail(f"Error connecting to redis: {e}")
-
-# Test if Reddis can be connected too locally
 def test_redis_reachability(redis_client):
     try:
         r = redis.Redis()
@@ -72,3 +54,21 @@ def test_function_create_redis_instance():
             "create_redis_instance() function does not connect in expected\
              manor")
         logging.error("Assertion failed:", e)
+
+
+# Test publish_vote_to_redis function
+def test_publish_vote_to_redis():
+    r = create_redis_instance(os.environ["REDIS_HOST"],
+                              os.environ["REDIS_PORT"],
+                              os.environ["REDIS_CHANNEL"],
+                              os.environ["REDIS_PASSWORD"]
+                              )
+
+    message = publish_vote_to_redis(
+        r, os.environ["REDIS_CHANNEL_TEST_MESSAGE"])
+    try:
+        assert message is not None, logging.info(
+            "Published:", message, " to Redis")
+        assert message is {os.environ["REDIS_CHANNEL_TEST_MESSAGE"]}
+    except Exception as e:
+        logging.error("Couldn't publish message to redis\nERROR: ", e)
